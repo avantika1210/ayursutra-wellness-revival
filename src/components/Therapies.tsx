@@ -1,8 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Droplets, Wind, Flame, Mountain, Waves, Sparkles } from "lucide-react";
+import { useState } from "react";
+import TherapyBookingModal from "./TherapyBookingModal";
+import { useToast } from "@/hooks/use-toast";
 
 const Therapies = () => {
+  const { toast } = useToast();
+  const [selectedTherapy, setSelectedTherapy] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const therapies = [
     {
       icon: Droplets,
@@ -60,6 +67,24 @@ const Therapies = () => {
     }
   ];
 
+  const handleBookTherapy = (therapy) => {
+    setSelectedTherapy(therapy);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedTherapy(null);
+  };
+
+  const handleBookAppointment = () => {
+    toast({
+      title: "Appointment Request Sent!",
+      description: `We'll contact you soon to confirm your ${selectedTherapy?.title} therapy appointment.`,
+    });
+    handleCloseModal();
+  };
+
   return (
     <section id="therapies" className="section-padding bg-gradient-to-b from-secondary/30 to-background">
       <div className="container mx-auto px-4">
@@ -116,6 +141,7 @@ const Therapies = () => {
                   </div>
                   
                   <Button 
+                    onClick={() => handleBookTherapy(therapy)}
                     className="w-full bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-primary-foreground font-medium group-hover:shadow-lg transition-all duration-300"
                   >
                     Book This Therapy
@@ -140,6 +166,14 @@ const Therapies = () => {
           </Button>
         </div>
       </div>
+
+      {/* Therapy Booking Modal */}
+      <TherapyBookingModal
+        therapy={selectedTherapy}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onBookAppointment={handleBookAppointment}
+      />
     </section>
   );
 };
