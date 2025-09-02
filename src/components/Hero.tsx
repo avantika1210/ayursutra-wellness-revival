@@ -17,9 +17,12 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 z-10">
         <div className="max-w-4xl mx-auto text-center text-primary-foreground">
           {/* Logo and Brand */}
-          <div className="flex items-center justify-center space-x-3 mb-6 fade-in-up">
-            <Leaf className="h-12 w-12" />
-            <h1 className="text-4xl md:text-6xl font-bold">AyurSutra</h1>
+          <div className="flex items-center justify-center mb-8 fade-in-up">
+            <img 
+              src="/lovable-uploads/df7dd0c8-031b-4bd5-830f-4ac3c33ebb32.png" 
+              alt="AyurSutra - Panchakarma Wellness Center" 
+              className="h-24 md:h-32 w-auto filter brightness-0 invert"
+            />
           </div>
           
           {/* Tagline */}

@@ -25,9 +25,12 @@ const Footer = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-2">
-              <Leaf className="h-8 w-8" />
-              <span className="text-2xl font-bold">AyurSutra</span>
+            <div className="flex items-center space-x-3">
+              <img 
+                src="/lovable-uploads/df7dd0c8-031b-4bd5-830f-4ac3c33ebb32.png" 
+                alt="AyurSutra Logo" 
+                className="h-12 w-auto filter brightness-0 invert"
+              />
             </div>
             <p className="text-primary-foreground/80 leading-relaxed">
               Reviving wellness through authentic Panchakarma treatments. 
