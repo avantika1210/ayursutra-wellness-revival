@@ -1,29 +1,75 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { toast } from "@/components/ui/use-toast";
+import { useNavigate } from "react-router-dom";
+import * as z from "zod";
 import bgImage from "@/assets/signimg.png";
 import Navbar from "@/components/Navbar";
 
+// ✅ Zod schema for signup validation
+const signupSchema = z
+  .object({
+    fullName: z.string().min(1, "Full name is required"),
+    email: z.string().email("Invalid email address"),
+    phone: z.string().min(10, "Phone number must be at least 10 digits"),
+    role: z.enum(["therapist", "patient"], {
+      errorMap: () => ({ message: "Please select a role" }),
+    }),
+    password: z.string().min(8, "Password must be at least 8 characters"),
+    confirmPassword: z.string().min(8, "Confirm Password is required"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
+
+type SignupFormData = z.infer<typeof signupSchema>;
+
 const SignUpPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState(""); // phone state
-  const [role, setRole] = useState(""); // role state
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupFormData>({
+    resolver: zodResolver(signupSchema),
+  });
 
-    if (password.length < 8) {
-      alert("Password must be at least 8 characters!");
-      return;
+  const onSubmit = async (data: SignupFormData) => {
+    setIsLoading(true);
+
+    try {
+      console.log("Signup Data:", data);
+
+      // API call
+      const response = await axios.post("http://localhost:5000/api/users/signup", data);
+      const user = response.data;
+
+      // Save user in localStorage
+      localStorage.setItem("currentUser", JSON.stringify(user));
+
+      toast({
+        title: "Signup Successful!",
+        description: `Welcome, ${user.user.fullName}!`,
+      });
+
+      window.dispatchEvent(new Event("userLogin"));
+
+      // Redirect based on role
+      navigate(user.role === "therapist" ? "/therapist-dashboard" : "/");
+    } catch (error: any) {
+      toast({
+        title: "Signup Failed",
+        description: error.response?.data?.message || "Something went wrong.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-
-    console.log("Signup Data:", { name, email, phone, role, password });
   };
 
   return (
@@ -36,7 +82,7 @@ const SignUpPage = () => {
       />
 
       {/* Fixed Navbar */}
-      <Navbar className="fixed top-0 left-0 w-full z-50 shadow-md bg-white/80 backdrop-blur-sm" />
+      <Navbar  />
 
       {/* Signup Card */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen pt-[80px] px-4">
@@ -45,7 +91,7 @@ const SignUpPage = () => {
             Create an Account
           </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Full Name */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -54,11 +100,12 @@ const SignUpPage = () => {
               <input
                 type="text"
                 placeholder="Enter your full name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                {...register("fullName")}
                 className="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none"
-                required
               />
+              {errors.fullName && (
+                <p className="text-red-500 text-xs mt-1">{errors.fullName.message}</p>
+              )}
             </div>
 
             {/* Email */}
@@ -69,11 +116,12 @@ const SignUpPage = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                {...register("email")}
                 className="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none"
-                required
               />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
+              )}
             </div>
 
             {/* Phone Number */}
@@ -84,28 +132,30 @@ const SignUpPage = () => {
               <input
                 type="tel"
                 placeholder="Enter your phone number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                {...register("phone")}
                 className="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none"
-                required
               />
+              {errors.phone && (
+                <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>
+              )}
             </div>
 
-            {/* Role Dropdown */}
+            {/* Role */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Role
               </label>
               <select
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
+                {...register("role")}
                 className="block w-full border border-green-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none"
-                required
               >
                 <option value="">Select role</option>
                 <option value="therapist">Therapist</option>
                 <option value="patient">Patient</option>
               </select>
+              {errors.role && (
+                <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>
+              )}
             </div>
 
             {/* Password */}
@@ -116,15 +166,11 @@ const SignUpPage = () => {
               <input
                 type="password"
                 placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password")}
                 className="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none"
-                required
               />
-              {password && password.length < 8 && (
-                <p className="text-red-500 text-xs mt-1">
-                  Password must be at least 8 characters
-                </p>
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>
               )}
             </div>
 
@@ -136,23 +182,21 @@ const SignUpPage = () => {
               <input
                 type="password"
                 placeholder="Confirm your password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                {...register("confirmPassword")}
                 className="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary focus:outline-none"
-                required
               />
-              {confirmPassword && confirmPassword.length < 8 && (
-                <p className="text-red-500 text-xs mt-1">
-                  Password must be at least 8 characters
-                </p>
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</p>
               )}
             </div>
 
+            {/* Submit button */}
             <button
               type="submit"
+              disabled={isLoading}
               className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary/90 transition-all"
             >
-              Sign Up
+              {isLoading ? "Signing up..." : "Sign Up"}
             </button>
           </form>
 

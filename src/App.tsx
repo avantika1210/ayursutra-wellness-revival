@@ -9,10 +9,13 @@ import BookTherapyPage from "./pages/BookTherapyPage";
 import Login from "./pages/Login";
 import SignUpPage from "./pages/SignUpPage";
 import ConsultantsPage from "./pages/ConsultantsPage";
+import TherapistListing from "./pages/TherapistListing";
 
 const queryClient = new QueryClient();
 
 const App = () => (
+
+  
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -25,6 +28,7 @@ const App = () => (
           <Route path="/book-therapy" element={<BookTherapyPage />} /> 
            <Route path="/login" element={<Login />} /> 
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/therapists" element={<TherapistListing />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
