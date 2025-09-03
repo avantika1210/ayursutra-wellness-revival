@@ -1,30 +1,33 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Leaf } from "lucide-react";
-
+import logo from "../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+    const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Therapies", href: "#therapies" },
+    //  { name: "Therapists", href: "#therapists" },
+    
     { name: "Testimonials", href: "#testimonials" },
     { name: "Contact", href: "#contact" },
-    { name: "Consultation", href: "#consultation" },
+    // { name: "Consultation", href: "#consultation" },
   ];
-
-  return (
-    <nav className="fixed top-0 w-full bg-background/95 backdrop-blur-sm z-50 border-b border-border shadow-sm">
+return (
+    <nav className="sticky top-0 w-full bg-background/95 backdrop-blur-sm z-50 border-b border-border shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <img 
-              src="/lovable-uploads/df7dd0c8-031b-4bd5-830f-4ac3c33ebb32.png" 
-              alt="AyurSutra Logo" 
-              className="h-10 w-auto"
-            />
+  src={logo} 
+  alt="AyurSutra Logo" 
+  className="h-28 w-auto"
+/>
           </div>
 
           {/* Desktop Navigation */}
@@ -42,7 +45,7 @@ const Navbar = () => {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
+            <Button onClick={() => navigate("/login")}>
               Login
             </Button>
             <Button size="sm" className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-primary-foreground">

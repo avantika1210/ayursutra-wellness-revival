@@ -155,13 +155,13 @@ const Contact = () => {
 
             {/* Quick Action Buttons */}
             <div className="space-y-4">
-              <Button 
+              {/* <Button 
                 className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 flex items-center justify-center space-x-2"
                 size="lg"
               >
                 <MessageCircle className="h-5 w-5" />
                 <span>WhatsApp Us</span>
-              </Button>
+              </Button> */}
               
               <Button 
                 variant="outline"

@@ -1,7 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, Users, Award, Leaf } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
 const About = () => {
+  const navigate = useNavigate();
+
+  const handleScheduleClick = () => {
+    navigate("/consultants"); 
+  };
   const stats = [
     { icon: Users, number: "5000+", label: "Patients Healed", color: "text-primary" },
     { icon: Heart, number: "98%", label: "Success Rate", color: "text-accent" },
@@ -87,9 +92,12 @@ const About = () => {
               Our expert practitioners are here to guide you through personalized Panchakarma treatments 
               tailored to your unique needs and constitution.
             </p>
-            <button className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-300 wellness-glow">
-              Schedule Consultation
-            </button>
+            <button
+      onClick={handleScheduleClick}
+      className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold transition-all duration-300 wellness-glow"
+    >
+      Schedule Consultation
+    </button>
           </div>
         </div>
       </div>

@@ -1,27 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Leaf, Star } from "lucide-react";
 import heroImage from "@/assets/ayurveda-hero-bg.jpg";
+import logo from "../assets/logo.png";
 
 const Hero = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/60 to-primary-light/40"></div>
-      </div>
+    <div 
+  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+  style={{ backgroundImage: `url(${heroImage})` }}
+>
+  {/* Smooth bottom fade */}
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/10 to-gray-950/40"></div>
+</div>
 
       {/* Content */}
       <div className="relative container mx-auto px-4 z-10">
         <div className="max-w-4xl mx-auto text-center text-primary-foreground">
           {/* Logo and Brand */}
-          <div className="flex items-center justify-center mb-8 fade-in-up">
+         <div className="flex items-center justify-center mt-50">
             <img 
-              src="/lovable-uploads/df7dd0c8-031b-4bd5-830f-4ac3c33ebb32.png" 
+              src={logo} 
               alt="AyurSutra - Panchakarma Wellness Center" 
-              className="h-24 md:h-32 w-auto filter brightness-0 invert"
+               className="h-24 md:h-32 lg:h-40 w-auto"
             />
           </div>
           
@@ -85,3 +87,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
+
