@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { TherapistCard } from "@/components/TherapistCard";
 import { TherapistSearch } from "@/components/TherapistSearch";
 import { TherapistFilters } from "@/components/TherapistFilters";
@@ -18,6 +19,7 @@ interface FilterState {
 const ITEMS_PER_PAGE = 6;
 
 export default function TherapistListing() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("rating");
   const [showFilters, setShowFilters] = useState(false);
@@ -101,8 +103,7 @@ export default function TherapistListing() {
   );
 
   const handleViewProfile = (id: string) => {
-    console.log("View profile for therapist:", id);
-    // TODO: Navigate to therapist profile page
+    navigate(`/therapists/${id}`);
   };
 
   const handleClearFilters = () => {

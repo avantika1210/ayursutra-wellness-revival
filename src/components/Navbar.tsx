@@ -48,7 +48,11 @@ return (
             <Button onClick={() => navigate("/login")}>
               Login
             </Button>
-            <Button size="sm" className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-primary-foreground">
+            <Button
+              size="sm"
+              className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-primary-foreground"
+              onClick={() => navigate("/therapists")}
+            >
               Book Appointment
             </Button>
           </div>
@@ -83,7 +87,11 @@ return (
               <Button variant="outline" size="sm">
                 Login
               </Button>
-              <Button size="sm" className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-primary-foreground">
+              <Button
+                size="sm"
+                className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-primary-foreground"
+                onClick={() => navigate("/therapists")}
+              >
                 Book Appointment
               </Button>
             </div>
