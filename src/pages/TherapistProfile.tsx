@@ -126,9 +126,13 @@ const TherapistProfile = () => {
 
                     {/* Action Buttons */}
                     <div className="space-y-3">
-                      <Button className="w-full" size="lg">
+                      <Button
+                        className="w-full"
+                        size="lg"
+                        onClick={() => navigate(`/therapists/${therapist.id}/book`)}
+                      >
                         <Calendar className="h-4 w-4 mr-2" />
-                        Book Appointment
+                        Book Session
                       </Button>
                       <Button variant="outline" className="w-full">
                         <Phone className="h-4 w-4 mr-2" />

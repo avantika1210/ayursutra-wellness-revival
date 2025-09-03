@@ -11,6 +11,7 @@ import SignUpPage from "./pages/SignUpPage";
 import ConsultantsPage from "./pages/ConsultantsPage";
 import TherapistListing from "./pages/TherapistListing";
 import TherapistProfile from "./pages/TherapistProfile";
+import BookingPage from "./pages/BookingPage";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/therapists" element={<TherapistListing />} />
           <Route path="/therapists/:id" element={<TherapistProfile />} />
+          <Route path="/therapists/:id/book" element={<BookingPage />} />
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
