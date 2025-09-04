@@ -46,7 +46,7 @@ const LoginForm = () => {
         console.log("Logging in with data:", data);
 
         // API call for login (new backend route)
-        const response = await axios.post("http://localhost:5000/api/auth/login", data);
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, data);
         console.log("response data:", response.data);
         const { token, user } = response.data;
 

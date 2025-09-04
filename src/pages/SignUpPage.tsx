@@ -49,7 +49,7 @@ const SignUpPage = () => {
       console.log("Signup Data (mapped):", payload);
 
       // API call to backend auth/register
-      const response = await axios.post("http://localhost:5000/api/auth/register", payload);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, payload);
       const { token, user } = response.data;
 
       // Save JWT and user in localStorage
