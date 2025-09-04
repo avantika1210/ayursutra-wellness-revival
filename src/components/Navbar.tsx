@@ -45,15 +45,8 @@ return (
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button onClick={() => navigate("/login")}>
-              Login
-            </Button>
-            <Button
-              size="sm"
-              className="bg-gradient-to-r from-primary to-primary-light hover:from-primary-dark hover:to-primary text-primary-foreground"
-              onClick={() => navigate("/therapists")}
-            >
-              Book Appointment
+            <Button onClick={() => navigate("/signup")}> 
+              Sign In
             </Button>
           </div>
 

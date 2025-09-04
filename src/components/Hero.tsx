@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { ArrowRight, Leaf, Star } from "lucide-react";
 import heroImage from "@/assets/ayurveda-hero-bg.jpg";
 import logo from "../assets/logo.png";
 
 const Hero = () => {
+  const navigate = useNavigate();
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -19,11 +21,11 @@ const Hero = () => {
       <div className="relative container mx-auto px-4 z-10">
         <div className="max-w-4xl mx-auto text-center text-primary-foreground">
           {/* Logo and Brand */}
-         <div className="flex items-center justify-center mt-50">
+         <div className="flex items-center justify-center mt-0">
             <img 
               src={logo} 
               alt="AyurSutra - Panchakarma Wellness Center" 
-               className="h-24 md:h-32 lg:h-40 w-auto"
+              className="h-40 md:h-56 lg:h-72 w-auto" // Increased size for all breakpoints
             />
           </div>
           
@@ -60,16 +62,15 @@ const Hero = () => {
             <Button 
               size="lg" 
               className="bg-accent hover:bg-accent-light text-accent-foreground font-semibold px-8 py-4 text-lg group wellness-glow"
+              onClick={() => navigate('/login')}
             >
               Book Your Appointment
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
             <Button 
-              variant="outline" 
               size="lg" 
-              className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary px-8 py-4 text-lg"
+              className="bg-accent hover:bg-accent-light text-accent-foreground font-semibold px-8 py-4 text-lg group wellness-glow"
             >
-              Learn More
+              Ask for Help
             </Button>
           </div>
         </div>

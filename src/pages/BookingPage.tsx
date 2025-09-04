@@ -11,15 +11,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User, Mail, Phone, MapPin, Star } from "lucide-react";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-
-const stripePromise = loadStripe("your-publishable-key-here"); // Replace with your Stripe publishable key
 
 const BookingForm = ({ therapist }: { therapist: Therapist }) => {
   const navigate = useNavigate();
-  const stripe = useStripe();
-  const elements = useElements();
 
   const [formData, setFormData] = useState({
     patientName: "",
@@ -57,7 +51,7 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
     return null;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
@@ -67,24 +61,14 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
       return;
     }
 
-    if (!stripe || !elements) {
-      setError("Stripe has not loaded yet.");
-      return;
-    }
-
     setLoading(true);
-
-    // Here you would typically call your backend to create a payment intent
-    // For demo, we simulate a successful payment
-
-    // Simulate payment processing delay
     setTimeout(() => {
       setLoading(false);
       setSuccess(true);
       setTimeout(() => {
         navigate("/therapists");
       }, 2000);
-    }, 3000);
+    }, 1500);
   };
 
   if (success) {
@@ -263,28 +247,7 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
               </div>
             </div>
 
-            {/* Payment Section */}
-            <div className="border-t pt-6">
-              <Label className="text-base font-semibold mb-4 block">Payment Information</Label>
-              <div className="bg-gray-50 p-4 rounded-lg mb-4">
-                <CardElement
-                  options={{
-                    style: {
-                      base: {
-                        fontSize: '16px',
-                        color: '#424770',
-                        '::placeholder': {
-                          color: '#aab7c4',
-                        },
-                      },
-                      invalid: {
-                        color: '#9e2146',
-                      },
-                    },
-                  }}
-                />
-              </div>
-            </div>
+            {/* ...no payment section... */}
 
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4">
@@ -294,14 +257,14 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
 
             <Button
               type="submit"
-              disabled={loading || !stripe}
+              disabled={loading}
               className="w-full"
               size="lg"
             >
               {loading ? (
                 <div className="flex items-center gap-2">
                   <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                  Processing Payment...
+                  Saving Booking...
                 </div>
               ) : (
                 `Complete Booking - ₹${therapist.consultationFee}`
@@ -336,9 +299,7 @@ const BookingPage = () => {
       <div className="min-h-screen bg-background py-12">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl font-bold mb-6">Book a Session with {therapist.name}</h1>
-          <Elements stripe={stripePromise}>
-            <BookingForm therapist={therapist} />
-          </Elements>
+          <BookingForm therapist={therapist} />
         </div>
       </div>
       <Footer />

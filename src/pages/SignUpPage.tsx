@@ -41,26 +41,29 @@ const SignUpPage = () => {
 
   const onSubmit = async (data: SignupFormData) => {
     setIsLoading(true);
-
     try {
-      console.log("Signup Data:", data);
+      // Map fullName to name for backend compatibility
+      const payload = { ...data, name: data.fullName };
+      delete payload.fullName;
+      console.log("Signup Data (mapped):", payload);
 
-      // API call
-      const response = await axios.post("http://localhost:5000/api/users/signup", data);
-      const user = response.data;
+      // API call to backend auth/register
+      const response = await axios.post("http://localhost:5000/api/auth/register", payload);
+      const { token, user } = response.data;
 
-      // Save user in localStorage
+      // Save JWT and user in localStorage
+      localStorage.setItem("token", token);
       localStorage.setItem("currentUser", JSON.stringify(user));
 
       toast({
         title: "Signup Successful!",
-        description: `Welcome, ${user.user.fullName}!`,
+        description: `Welcome, ${user.name}!`,
       });
 
       window.dispatchEvent(new Event("userLogin"));
 
-      // Redirect based on role
-      navigate(user.role === "therapist" ? "/therapist-dashboard" : "/");
+  // Redirect to login page after successful signup
+  navigate('/login');
     } catch (error: any) {
       toast({
         title: "Signup Failed",

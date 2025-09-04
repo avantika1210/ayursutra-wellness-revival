@@ -45,18 +45,19 @@ const LoginForm = () => {
         setIsLoading(true);
         console.log("Logging in with data:", data);
 
-        // API call for login
-        const response = await axios.post("http://localhost:5000/api/users/login", data);
+        // API call for login (new backend route)
+        const response = await axios.post("http://localhost:5000/api/auth/login", data);
         console.log("response data:", response.data);
-        const user = response.data; // assuming API returns user object with name & role
+        const { token, user } = response.data;
 
-        // Save current user in localStorage
+        // Save JWT and user in localStorage
+        localStorage.setItem("token", token);
         localStorage.setItem("currentUser", JSON.stringify(user));
 
         // Success toast
         toast({
           title: "Login Successful!",
-          description: `Welcome back, ${user.user.fullName}!`,
+          description: `Welcome back, ${user.name}!`,
         });
 
         // Notify navbar
@@ -68,7 +69,7 @@ const LoginForm = () => {
           localStorage.removeItem("redirectAfterLogin");
           navigate(redirectPath);
         } else {
-          navigate(user.role === "/" ? "/" : "/");
+          navigate("/therapists"); // Redirect to Find Your Therapists page
         }
       } catch (error: any) {
         toast({
