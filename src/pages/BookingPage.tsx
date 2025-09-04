@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User, Mail, Phone, MapPin, Star } from "lucide-react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { toast } from "sonner";
 
 const stripePromise = loadStripe("your-publishable-key-here"); // Replace with your Stripe publishable key
 
@@ -67,10 +68,10 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
       return;
     }
 
-    if (!stripe || !elements) {
-      setError("Stripe has not loaded yet.");
-      return;
-    }
+    // if (!stripe || !elements) {
+    //   setError("Stripe has not loaded yet.");
+    //   return;
+    // }
 
     setLoading(true);
 
@@ -81,6 +82,7 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
     setTimeout(() => {
       setLoading(false);
       setSuccess(true);
+      toast.success("Booking successful!");
       setTimeout(() => {
         navigate("/therapists");
       }, 2000);
@@ -264,7 +266,7 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
             </div>
 
             {/* Payment Section */}
-            <div className="border-t pt-6">
+            {/* <div className="border-t pt-6">
               <Label className="text-base font-semibold mb-4 block">Payment Information</Label>
               <div className="bg-gray-50 p-4 rounded-lg mb-4">
                 <CardElement
@@ -284,7 +286,7 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
                   }}
                 />
               </div>
-            </div>
+            </div> */}
 
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4">
