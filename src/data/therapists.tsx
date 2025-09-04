@@ -4,6 +4,7 @@ import therapist3 from "@/assets/therapist-3.jpg";
 
 export interface Therapist {
   id: string;
+  user: string | null;
   name: string;
   designation: string;
   experience: number;
@@ -17,103 +18,364 @@ export interface Therapist {
   education: string[];
   languages: string[];
   consultationFee: number;
+  certifications: string[];
+  availableTimeSlots: string[];
+  availableDays: string[]; 
+  createdAt: string;
+  __v: number;
+ 
 }
 
 export const therapistsData: Therapist[] = [
-  {
-    id: "1",
-    name: "Dr. Anjali Sharma",
-    designation: "Senior Ayurveda Specialist",
-    experience: 12,
-    clinic: "Ayur Wellness Center",
-    specializations: ["Vamana", "Stress Management", "Detoxification", "Mental Wellness"],
-    rating: 4.8,
-    totalReviews: 156,
-    image: therapist1,
-    location: "Mumbai, Maharashtra",
-    bio: "Dr. Anjali Sharma is a renowned Ayurveda specialist with over 12 years of experience in Panchakarma treatments. She specializes in stress management and mental wellness through traditional Ayurvedic practices.",
-    education: ["BAMS - Government Ayurveda College, Mumbai", "MD Panchakarma - Gujarat Ayurveda University"],
-    languages: ["Hindi", "English", "Marathi"],
-    consultationFee: 800
-  },
-  {
-    id: "2", 
-    name: "Dr. Rajesh Kumar",
-    designation: "Panchakarma Therapist",
-    experience: 8,
-    clinic: "Panchakarma Healing Hub",
-    specializations: ["Basti", "Pain Management", "Digestive Health", "Raktamokshana"],
-    rating: 4.6,
-    totalReviews: 89,
-    image: therapist2,
-    location: "Delhi, NCR",
-    bio: "Dr. Rajesh Kumar specializes in Basti therapy and has helped hundreds of patients with chronic pain and digestive issues through authentic Panchakarma treatments.",
-    education: ["BAMS - Rajasthan Ayurveda University", "Diploma in Panchakarma"],
-    languages: ["Hindi", "English", "Punjabi"],
-    consultationFee: 650
-  },
-  {
-    id: "3",
-    name: "Dr. Mohan Gupta",
-    designation: "Chief Ayurveda Consultant",
-    experience: 25,
-    clinic: "Vedic Health Clinic",
-    specializations: ["Nasya", "Vamana", "Detoxification", "Skin Care", "Mental Wellness"],
-    rating: 4.9,
-    totalReviews: 234,
-    image: therapist3,
-    location: "Pune, Maharashtra",
-    bio: "Dr. Mohan Gupta is a veteran Ayurveda practitioner with 25 years of experience. He is an expert in Nasya therapy and has authored several research papers on traditional Panchakarma treatments.",
-    education: ["BAMS - Pune University", "MD Ayurveda - Banaras Hindu University", "PhD in Ayurveda Research"],
-    languages: ["Hindi", "English", "Marathi", "Sanskrit"],
-    consultationFee: 1200
-  },
-  {
-    id: "4",
-    name: "Dr. Priya Patel",
-    designation: "Ayurveda Physician",
-    experience: 6,
-    clinic: "Natural Therapy Center",
-    specializations: ["Stress Management", "Skin Care", "Digestive Health"],
-    rating: 4.5,
-    totalReviews: 67,
-    image: therapist1,
-    location: "Bangalore, Karnataka",
-    bio: "Dr. Priya Patel focuses on integrative Ayurveda treatments, combining traditional practices with modern wellness approaches for optimal patient care.",
-    education: ["BAMS - SDM College of Ayurveda", "Certification in Yoga Therapy"],
-    languages: ["Hindi", "English", "Gujarati", "Kannada"],
-    consultationFee: 550
-  },
-  {
-    id: "5",
-    name: "Dr. Vikram Singh",
-    designation: "Panchakarma Specialist",
-    experience: 15,
-    clinic: "Holistic Ayurveda Clinic",
-    specializations: ["Basti", "Raktamokshana", "Pain Management", "Detoxification"],
-    rating: 4.7,
-    totalReviews: 198,
-    image: therapist2,
-    location: "Jaipur, Rajasthan",
-    bio: "Dr. Vikram Singh is known for his expertise in Basti and blood purification therapies. He has successfully treated numerous patients with chronic conditions.",
-    education: ["BAMS - National Institute of Ayurveda", "MD Panchakarma"],
-    languages: ["Hindi", "English", "Rajasthani"],
-    consultationFee: 750
-  },
-  {
-    id: "6",
-    name: "Dr. Sunita Joshi",
-    designation: "Women's Health Specialist",
-    experience: 10,
-    clinic: "Ayur Wellness Center",
-    specializations: ["Vamana", "Nasya", "Stress Management", "Mental Wellness"],
-    rating: 4.8,
-    totalReviews: 142,
-    image: therapist1,
-    location: "Chennai, Tamil Nadu",
-    bio: "Dr. Sunita Joshi specializes in women's health and fertility treatments using traditional Ayurvedic methods combined with Panchakarma therapies.",
-    education: ["BAMS - Government Ayurveda College, Chennai", "Specialization in Stree Roga"],
-    languages: ["Hindi", "English", "Tamil", "Telugu"],
-    consultationFee: 700
-  }
+    {
+      "id": "68b85d7239f5012a48864d9c",
+      "user": null,
+      "name": "Dr. Anjali Sharma",
+      "designation": "BAMS, Panchakarma Specialist",
+      "experience": 8,
+      "clinic": "Ayush Panchakarma Wellness Center",
+      "specializations": [
+        "Panchakarma Therapy",
+        "Detoxification",
+        "Stress Management"
+      ],
+      "rating": 4.5,
+      "totalReviews": 120,
+      "image": "https://randomuser.me/api/portraits/women/45.jpg",
+      "location": "Delhi, India",
+      "certifications": [
+        "Certified Panchakarma Therapist - NIA Pune"
+      ],
+      "bio": "Expert Ayurvedic doctor specializing in detox and rejuvenation through Panchakarma.",
+      "availableDays": [
+        "Monday",
+        "Wednesday",
+        "Friday"
+      ],
+      "availableTimeSlots": [
+        "10:00 AM - 1:00 PM",
+        "5:00 PM - 8:00 PM"
+      ],
+      "createdAt": "2025-09-03T15:23:30.657Z",
+      "__v": 0,
+      education: [],
+      languages: [],
+      consultationFee: 0
+    },
+    {
+      "id": "68b85d7239f5012a48864d9d",
+      "user": null,
+      "name": "Dr. Ramesh Verma",
+      "designation": "BAMS, MD Ayurveda",
+      "experience": 12,
+      "clinic": "Kerala Ayurveda Healing Center",
+      "specializations": [
+        "Vamana",
+        "Virechana",
+        "Nasya",
+        "Raktamokshana"
+      ],
+      "rating": 4.8,
+      "totalReviews": 210,
+      "image": "https://randomuser.me/api/portraits/men/32.jpg",
+      "location": "Mumbai, India",
+      "certifications": [
+        "MD in Ayurvedic Panchakarma"
+      ],
+      "bio": "Renowned Ayurvedic physician practicing traditional Panchakarma therapies for holistic healing.",
+      "availableDays": [
+        "Tuesday",
+        "Thursday",
+        "Saturday"
+      ],
+      "availableTimeSlots": [
+        "9:00 AM - 12:00 PM",
+        "3:00 PM - 6:00 PM"
+      ],
+      "createdAt": "2025-09-03T15:23:30.658Z",
+      "__v": 0,
+      education: [],
+      languages: [],
+      consultationFee: 0
+    },
+    {
+      "id": "68b85d7239f5012a48864d9e",
+      "user": null,
+      "name": "Dr. Priya Nair",
+      "designation": "BAMS, Panchakarma Consultant",
+      "experience": 7,
+      "clinic": "Sanjeevani Ayurveda Hospital",
+      "specializations": [
+        "Rejuvenation Therapy",
+        "Pain Management",
+        "Digestive Disorders"
+      ],
+      "rating": 4.6,
+      "totalReviews": 95,
+      "image": "https://randomuser.me/api/portraits/women/33.jpg",
+      "location": "Kochi, Kerala",
+      "certifications": [
+        "Advanced Panchakarma Therapy Course - AYUSH"
+      ],
+      "bio": "Dedicated therapist providing authentic Kerala Panchakarma treatments.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Thursday"
+      ],
+      "availableTimeSlots": [
+        "11:00 AM - 2:00 PM",
+        "4:00 PM - 7:00 PM"
+      ],
+      "createdAt": "2025-09-03T15:23:30.659Z",
+      "__v": 0,
+      education: [],
+      languages: [],
+      consultationFee: 0
+    },
+    {
+      "id": "68b85d7239f5012a48864d9f",
+      "user": null,
+      "name": "Dr. Arvind Kulkarni",
+      "designation": "BAMS, Ayurveda Specialist",
+      "experience": 15,
+      "clinic": "Ayurved Gram Panchakarma Center",
+      "specializations": [
+        "Body Detox",
+        "Neurological Disorders",
+        "Respiratory Therapies"
+      ],
+      "rating": 4.9,
+      "totalReviews": 300,
+      "image": "https://randomuser.me/api/portraits/men/45.jpg",
+      "location": "Pune, India",
+      "certifications": [
+        "Diploma in Panchakarma Therapy"
+      ],
+      "bio": "Specialist in ancient Panchakarma therapies aimed at mind-body detoxification.",
+      "availableDays": [
+        "Monday",
+        "Wednesday",
+        "Friday",
+        "Saturday"
+      ],
+      "availableTimeSlots": [
+        "10:30 AM - 1:30 PM",
+        "6:00 PM - 9:00 PM"
+      ],
+      "createdAt": "2025-09-03T15:23:30.659Z",
+      "__v": 0,
+      education: [],
+      languages: [],
+      consultationFee: 0
+    },
+    {
+      "id": "68b85d7239f5012a48864da0",
+      "user": null,
+      "name": "Dr. Meera Iyer",
+      "designation": "BAMS, Panchakarma Expert",
+      "experience": 9,
+      "clinic": "Shanti Ayurveda Panchakarma Kendra",
+      "specializations": [
+        "Skin Disorders",
+        "Weight Management",
+        "Stress Relief"
+      ],
+      "rating": 4.7,
+      "totalReviews": 160,
+      "image": "https://randomuser.me/api/portraits/women/52.jpg",
+      "location": "Bangalore, India",
+      "certifications": [
+        "NAD Panchakarma Certification"
+      ],
+      "bio": "Focused on holistic healing and rejuvenation using Panchakarma therapies.",
+      "availableDays": [
+        "Tuesday",
+        "Thursday",
+        "Saturday"
+      ],
+      "availableTimeSlots": [
+        "9:30 AM - 12:30 PM",
+        "5:30 PM - 8:30 PM"
+      ],
+      "createdAt": "2025-09-03T15:23:30.660Z",
+      "__v": 0,
+      education: [],
+      languages: [],
+      consultationFee: 0
+    },
+    {
+      "id": "68b85d7239f5012a48864da1",
+      "user": null,
+      "name": "Dr. Shubham Patil",
+      "designation": "BAMS, MD Ayurveda",
+      "experience": 11,
+      "clinic": "Vedant Panchakarma Ayurved",
+      "specializations": [
+        "Obesity Therapy",
+        "Metabolic Disorders",
+        "Panchakarma Detox"
+      ],
+      "rating": 4.4,
+      "totalReviews": 88,
+      "image": "https://randomuser.me/api/portraits/men/23.jpg",
+      "location": "Nagpur, India",
+      "certifications": [
+        "MD Ayurveda - Panchakarma Specialization"
+      ],
+      "bio": "Ayurvedic physician advocating natural detox therapies for a healthier lifestyle.",
+      "availableDays": [
+        "Monday",
+        "Wednesday",
+        "Friday"
+      ],
+      "availableTimeSlots": [
+        "10:00 AM - 2:00 PM"
+      ],
+      "createdAt": "2025-09-03T15:23:30.660Z",
+      "__v": 0,
+      education: [],
+      languages: [],
+      consultationFee: 0
+    },
+    {
+      "id": "68b85d7239f5012a48864da2",
+      "user": null,
+      "name": "Dr. Neha Joshi",
+      "designation": "BAMS, Panchakarma Specialist",
+      "experience": 6,
+      "clinic": "Ayushakti Ayurved Health Center",
+      "specializations": [
+        "Migraine Relief",
+        "Joint Pains",
+        "Stress Relief"
+      ],
+      "rating": 4.3,
+      "totalReviews": 75,
+      "image": "https://randomuser.me/api/portraits/women/67.jpg",
+      "location": "Ahmedabad, India",
+      "certifications": [
+        "Certified Panchakarma Healer"
+      ],
+      "bio": "Helping patients restore balance through Panchakarma Ayurvedic therapies.",
+      "availableDays": [
+        "Tuesday",
+        "Thursday",
+        "Sunday"
+      ],
+      "availableTimeSlots": [
+        "8:00 AM - 11:00 AM",
+        "4:00 PM - 7:00 PM"
+      ],
+      "createdAt": "2025-09-03T15:23:30.660Z",
+      "__v": 0,
+      education: [],
+      languages: [],
+      consultationFee: 0
+    },
+    {
+      "id": "68b85d7239f5012a48864da3",
+      "user": null,
+      "name": "Dr. Sanjay Mishra",
+      "designation": "BAMS, Ayurveda Specialist",
+      "experience": 20,
+      "clinic": "Ayush Panchakarma Chikitsalay",
+      "specializations": [
+        "Respiratory Therapy",
+        "Diabetes Management",
+        "Vamana"
+      ],
+      "rating": 5,
+      "totalReviews": 420,
+      "image": "https://randomuser.me/api/portraits/men/56.jpg",
+      "location": "Varanasi, India",
+      "certifications": [
+        "PhD in Ayurveda - Panchakarma Research"
+      ],
+      "bio": "Senior Ayurvedic consultant with two decades of experience in Panchakarma.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Thursday",
+        "Saturday"
+      ],
+      "availableTimeSlots": [
+        "9:00 AM - 12:00 PM",
+        "3:00 PM - 6:00 PM"
+      ],
+      "createdAt": "2025-09-03T15:23:30.660Z",
+      "__v": 0,
+      education: [],
+      languages: [],
+      consultationFee: 0
+    },
+    {
+      "id": "68b85d7239f5012a48864da4",
+      "user": null,
+      "name": "Dr. Kavita Deshmukh",
+      "designation": "BAMS, Panchakarma Therapist",
+      "experience": 5,
+      "clinic": "Aarogyam Ayurvedic Panchakarma",
+      "specializations": [
+        "Female Health",
+        "Detox",
+        "Skin Rejuvenation"
+      ],
+      "rating": 4.2,
+      "totalReviews": 64,
+      "image": "https://randomuser.me/api/portraits/women/21.jpg",
+      "location": "Indore, India",
+      "certifications": [
+        "Certified Ayurvedic Wellness Therapist"
+      ],
+      "bio": "Dedicated Panchakarma therapist with focus on women's health & detox.",
+      "availableDays": [
+        "Wednesday",
+        "Friday",
+        "Sunday"
+      ],
+      "availableTimeSlots": [
+        "11:00 AM - 2:00 PM"
+      ],
+      "createdAt": "2025-09-03T15:23:30.661Z",
+      "__v": 0,
+      education: [],
+      languages: [],
+      consultationFee: 0
+    },
+    {
+      "id": "68b85d7239f5012a48864da5",
+      "user": null,
+      "name": "Dr. Rohit Bhat",
+      "designation": "BAMS, MD Ayurveda",
+      "experience": 13,
+      "clinic": "Swasthya Panchakarma Ayurved",
+      "specializations": [
+        "Neurological Disorders",
+        "Panchakarma Detox",
+        "Rejuvenation"
+      ],
+      "rating": 4.6,
+      "totalReviews": 180,
+      "image": "https://randomuser.me/api/portraits/men/77.jpg",
+      "location": "Jaipur, India",
+      "certifications": [
+        "MD Ayurveda - Panchakarma"
+      ],
+      "bio": "Combining classical Panchakarma techniques with modern practices for better results.",
+      "availableDays": [
+        "Monday",
+        "Thursday",
+        "Saturday"
+      ],
+      "availableTimeSlots": [
+        "10:30 AM - 1:30 PM",
+        "5:30 PM - 8:30 PM"
+      ],
+      "createdAt": "2025-09-03T15:23:30.661Z",
+      "__v": 0,
+      education: [],
+      languages: [],
+      consultationFee: 0
+    }
 ];
