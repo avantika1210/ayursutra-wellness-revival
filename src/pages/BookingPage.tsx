@@ -11,14 +11,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, User, Mail, Phone, MapPin, Star } from "lucide-react";
-<<<<<<< HEAD
-=======
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { toast } from "sonner";
 
 const stripePromise = loadStripe("your-publishable-key-here"); // Replace with your Stripe publishable key
->>>>>>> 62df3571e817d34cb60f2020f92f7de5ef7a860f
 
 const BookingForm = ({ therapist }: { therapist: Therapist }) => {
   const navigate = useNavigate();
@@ -69,14 +66,11 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
       return;
     }
 
-<<<<<<< HEAD
-=======
     // if (!stripe || !elements) {
     //   setError("Stripe has not loaded yet.");
     //   return;
     // }
 
->>>>>>> 62df3571e817d34cb60f2020f92f7de5ef7a860f
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -264,9 +258,6 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
               </div>
             </div>
 
-<<<<<<< HEAD
-            {/* ...no payment section... */}
-=======
             {/* Payment Section */}
             {/* <div className="border-t pt-6">
               <Label className="text-base font-semibold mb-4 block">Payment Information</Label>
@@ -289,7 +280,6 @@ const BookingForm = ({ therapist }: { therapist: Therapist }) => {
                 />
               </div>
             </div> */}
->>>>>>> 62df3571e817d34cb60f2020f92f7de5ef7a860f
 
             {error && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-4">

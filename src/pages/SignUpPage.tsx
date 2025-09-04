@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import * as z from "zod";
 import bgImage from "@/assets/signimg.png";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 // ✅ Zod schema for signup validation
 const signupSchema = z
@@ -62,8 +63,8 @@ const SignUpPage = () => {
 
       window.dispatchEvent(new Event("userLogin"));
 
-  // Redirect to login page after successful signup
-  navigate('/login');
+      // Redirect to login page after successful signup
+      navigate('/login');
     } catch (error: any) {
       toast({
         title: "Signup Failed",
@@ -85,10 +86,10 @@ const SignUpPage = () => {
       />
 
       {/* Fixed Navbar */}
-      <Navbar  />
 
+      <Navbar />
       {/* Signup Card */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen pt-[80px] px-4">
+      <div className="relative flex flex-col items-center justify-center min-h-screen pt-[80px] px-4">
         <div className="bg-white/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-bold text-center text-primary mb-6">
             Create an Account
@@ -211,6 +212,12 @@ const SignUpPage = () => {
           </p>
         </div>
       </div>
+      <div className="relative z-10">
+      ̌<Footer />
+
+      </div>
+
+
     </div>
   );
 };
